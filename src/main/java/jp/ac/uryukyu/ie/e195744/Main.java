@@ -17,6 +17,43 @@ class Janken{
     }
 }
 
+/**プレイヤーが何を出すのかを決める
+ */
+class Player{
+    int hand;
+
+    /**入力によって出す手を決める
+     * 0が入力されたならグーを1が入力されたならチョキを2が入力されたならパーを出す
+     */
+    void setHand(){
+        System.out.println(0 + ":グー" + 1 + ":チョキ" + 2 + ":パー");
+        Scanner scanner = new Scanner(System.in);
+        hand = scanner.nextInt();
+    }
+
+    int getHand(){
+        return hand;
+    }
+}
+
+/**CPUが何を出すのかを決める
+ */
+class CPU{
+    int hand;
+
+    /**ランダムでCPUの出す手を決める
+     * 0が出ればグー1が出ればチョキ2が出ればパー
+     */
+    void setHand(){
+        Random rand = new Random();
+        hand = rand.nextInt(3);
+    }
+
+    int getHand(){
+        return hand;
+    }
+}
+
 /**
  * 勝敗を判断して勝ちと負けの数を数える
  */
