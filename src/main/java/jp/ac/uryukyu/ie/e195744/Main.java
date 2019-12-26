@@ -3,17 +3,29 @@ import java.util.Scanner;
 import java.util.Random;
 
 class Janken{
-    int gu = 0;
-    int choki = 1;
-    int pa = 2;
-    boolean retry = true;
-
     void startMessage(){
         System.out.println("わたしにじゃんけんで勝てるかな？");
     }
 
     void endMessage(){
         System.out.println("またやりましょう！");
+    }
+
+    Janken(){
+        Player player = new Player();
+        CPU cpu = new CPU();
+        Judge judge = new Judge();
+        Retry retry = new Retry();
+
+        while (retry.play){
+            System.out.println("さいしょはグー、じゃんけんぽん");
+
+            cpu.setHand();
+            player.setHand();
+            judge.judgement(cpu.getHand(),player.getHand());
+            judge.result();
+            retry.retry();
+        }
     }
 }
 
@@ -81,8 +93,42 @@ class Judge {
                 System.out.println("あなたの負けです！");
                 lose++;
                 break;
+            default:
         }
     }
+
+    /**Playerの勝敗の数を出力する
+     */
+    void result(){
+        System.out.println("＊＊＊あなたの勝敗＊＊＊");
+        System.out.println("勝ち：" + win + "回");
+        System.out.println("勝ち" + lose + "回");
+        System.out.println("＊＊＊＊＊＊＊＊＊＊＊＊");
+    }
 }
+
+/**もう一度プレイするか質問する
+ * もう一度プレイするには1を入力し、終了するには0を入力する
+ */
+class Retry{
+    boolean play = true;
+    void retry(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("もう一度続けるには「１」を終了するには「０」を押してください");
+        int re = scanner.nextInt();
+        switch (re){
+            case 1:
+                System.out.println("もう一度勝負しましょう");
+            case 0:
+                System.out.println("ありがとうございました！");
+                play = false;
+        }
+
+    }
+}
+
 public class Main{
+    public static void main(String[] args){
+
+    }
 }
