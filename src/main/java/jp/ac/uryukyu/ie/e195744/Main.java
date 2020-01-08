@@ -11,14 +11,14 @@ class Janken{
         System.out.println("またやりましょう！");
     }
 
-    Janken(){
-        Player player = new Player();
-        CPU cpu = new CPU();
-        Judge judge = new Judge();
-        Retry retry = new Retry();
+    Player player = new Player();
+    CPU cpu = new CPU();
+    Judge judge = new Judge();
+    Retry retry = new Retry();
 
+    void play(){
         while (retry.play){
-            System.out.println("さいしょはグー、じゃんけんぽん");
+            System.out.println("さいしょはグー、じゃんけん?");
 
             cpu.setHand();
             player.setHand();
@@ -38,7 +38,7 @@ class Player{
      * 0が入力されたならグーを1が入力されたならチョキを2が入力されたならパーを出す
      */
     void setHand(){
-        System.out.println(0 + ":グー" + 1 + ":チョキ" + 2 + ":パー");
+        System.out.println(0 + ":グー  " + 1 + ":チョキ  " + 2 + ":パー");
         Scanner scanner = new Scanner(System.in);
         hand = scanner.nextInt();
     }
@@ -67,12 +67,13 @@ class CPU{
 }
 
 /**
- * 勝敗を判断して勝ちと負けの数を数える
+ * 勝敗を判断して勝ちとあいこと負けの数を数える
  */
 class Judge {
     int judge;
     int win = 0;
     int lose = 0;
+    int draw = 0;
 
     /**勝ち、負け、あいこを判断する
      *
@@ -83,7 +84,8 @@ class Judge {
         judge = cpuHand - playerHand + 3;
         switch (judge % 3) {
             case 0:
-                System.out.println("あ〜いこで");
+                System.out.println("あいこでした");
+                draw++;
                 break;
             case 1:
                 System.out.println("あなたの勝ちです！");
@@ -102,7 +104,8 @@ class Judge {
     void result(){
         System.out.println("＊＊＊あなたの勝敗＊＊＊");
         System.out.println("勝ち：" + win + "回");
-        System.out.println("勝ち" + lose + "回");
+        System.out.println("あいこ" + draw + "回");
+        System.out.println("負け" + lose + "回");
         System.out.println("＊＊＊＊＊＊＊＊＊＊＊＊");
     }
 }
@@ -119,9 +122,11 @@ class Retry{
         switch (re){
             case 1:
                 System.out.println("もう一度勝負しましょう");
+                break;
             case 0:
                 System.out.println("ありがとうございました！");
                 play = false;
+                break;
         }
 
     }
@@ -129,6 +134,7 @@ class Retry{
 
 public class Main{
     public static void main(String[] args){
-
+        Janken janken = new Janken();
+        janken.play();
     }
 }
