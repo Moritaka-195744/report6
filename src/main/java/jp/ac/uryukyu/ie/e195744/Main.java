@@ -7,7 +7,7 @@ class Janken{
         System.out.println("わたしにじゃんけんで勝てるかな？");
     }
 
-    void endMessage(){
+    public void endMessage(){
         System.out.println("またやりましょう！");
     }
 
@@ -16,8 +16,8 @@ class Janken{
     Judge judge = new Judge();
     Retry retry = new Retry();
 
-    void play(){
-        while (retry.play){
+    public void play(){
+        while (retry.getPlay()){
             System.out.println("さいしょはグー、じゃんけん?");
 
             cpu.setHand();
@@ -32,12 +32,12 @@ class Janken{
 /**プレイヤーが何を出すのかを決める
  */
 class Player{
-    int hand;
+    private int hand;
 
     /**入力によって出す手を決める
      * 0が入力されたならグーを1が入力されたならチョキを2が入力されたならパーを出す
      */
-    void setHand(){
+    public void setHand(){
         System.out.println(0 + ":グー  " + 1 + ":チョキ  " + 2 + ":パー");
         Scanner scanner = new Scanner(System.in);
         try{
@@ -52,7 +52,7 @@ class Player{
         }
     }
 
-    int getHand(){
+    public int getHand(){
         return hand;
     }
 }
@@ -60,17 +60,17 @@ class Player{
 /**CPUが何を出すのかを決める
  */
 class CPU{
-    int hand;
+    private int hand;
 
     /**ランダムでCPUの出す手を決める
      * 0が出ればグー1が出ればチョキ2が出ればパー
      */
-    void setHand(){
+    public void setHand(){
         Random rand = new Random();
         hand = rand.nextInt(3);
     }
 
-    int getHand(){
+    public int getHand(){
         return hand;
     }
 }
@@ -79,11 +79,11 @@ class CPU{
  * 勝敗を判断して勝ちとあいこと負けの数を数える
  */
 class Judge {
-    int judge;
-    int win = 0;
-    int lose = 0;
-    int draw = 0;
-    String[] handList = {"グー", "チョキ", "パー"};
+    private int judge;
+    private int win = 0;
+    private int lose = 0;
+    private int draw = 0;
+    private String[] handList = {"グー", "チョキ", "パー"};
 
     /**
      * 勝ち、負け、あいこを判断する
@@ -91,7 +91,7 @@ class Judge {
      * @param cpuHand    CPUが何を出したのか
      * @param playerHand Playerが何を出したのか
      */
-    void judgement(int cpuHand, int playerHand) {
+    public void judgement(int cpuHand, int playerHand) {
         judge = cpuHand - playerHand + 3;
         switch (judge % 3) {
             case 0:
@@ -116,7 +116,7 @@ class Judge {
     /**
      * Playerの勝敗の数を出力する
      */
-    void result() {
+    public void result() {
         System.out.println("＊＊＊あなたの勝敗＊＊＊");
         System.out.println("勝ち：" + win + "回");
         System.out.println("あいこ" + draw + "回");
@@ -129,9 +129,12 @@ class Judge {
  * もう一度プレイするには1を入力し、終了するには0を入力する
  */
 class Retry{
-    boolean play = true;
-    int re;
-    void retry(){
+    private boolean play = true;
+    private int re;
+
+    public boolean getPlay(){return play;}
+
+    public void retry(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("もう一度続けるには「１」を終了するには「０」を押してください");
         try {
@@ -152,6 +155,7 @@ class Retry{
                 System.out.println("ありがとうございました！");
                 play = false;
                 break;
+            default:
         }
 
     }
