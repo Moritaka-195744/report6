@@ -113,6 +113,12 @@ class Judge {
         }
     }
 
+    public int getWin(){return win;}
+
+    public int getLose(){return lose;}
+
+    public int getDraw(){return draw;}
+
     /**
      * Playerの勝敗の数を出力する
      */

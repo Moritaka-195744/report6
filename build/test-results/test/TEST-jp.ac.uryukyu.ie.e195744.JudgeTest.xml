@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jp.ac.uryukyu.ie.e195744.JudgeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-01-20T13:51:46" hostname="kinjoumorisakainoMacBook-Air.local" time="0.053">
+  <properties/>
+  <testcase name="judgement()" classname="jp.ac.uryukyu.ie.e195744.JudgeTest" time="0.053"/>
+  <system-out><![CDATA[あなた:グー   CPU:グー
+あいこでした
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
