@@ -40,7 +40,16 @@ class Player{
     void setHand(){
         System.out.println(0 + ":グー  " + 1 + ":チョキ  " + 2 + ":パー");
         Scanner scanner = new Scanner(System.in);
-        hand = scanner.nextInt();
+        try{
+            hand = scanner.nextInt();
+            if(hand<0 || 2<hand){
+                System.out.println("0か1か2を入力してください");
+                setHand();
+            }
+        } catch (Exception e){
+            System.out.println("0か1か2を入力してください");
+            setHand();
+        }
     }
 
     int getHand(){
@@ -74,24 +83,29 @@ class Judge {
     int win = 0;
     int lose = 0;
     int draw = 0;
+    String[] handList = {"グー", "チョキ", "パー"};
 
-    /**勝ち、負け、あいこを判断する
+    /**
+     * 勝ち、負け、あいこを判断する
      *
-     * @param cpuHand CPUが何を出したのか
+     * @param cpuHand    CPUが何を出したのか
      * @param playerHand Playerが何を出したのか
      */
     void judgement(int cpuHand, int playerHand) {
         judge = cpuHand - playerHand + 3;
         switch (judge % 3) {
             case 0:
+                System.out.println("あなた:" + handList[playerHand] + "   CPU:" + handList[cpuHand]);
                 System.out.println("あいこでした");
                 draw++;
                 break;
             case 1:
+                System.out.println("あなた:" + handList[playerHand] + "   CPU:" + handList[cpuHand]);
                 System.out.println("あなたの勝ちです！");
                 win++;
                 break;
             case 2:
+                System.out.println("あなた:" + handList[playerHand] + "   CPU:" + handList[cpuHand]);
                 System.out.println("あなたの負けです！");
                 lose++;
                 break;
@@ -99,9 +113,10 @@ class Judge {
         }
     }
 
-    /**Playerの勝敗の数を出力する
+    /**
+     * Playerの勝敗の数を出力する
      */
-    void result(){
+    void result() {
         System.out.println("＊＊＊あなたの勝敗＊＊＊");
         System.out.println("勝ち：" + win + "回");
         System.out.println("あいこ" + draw + "回");
@@ -115,10 +130,20 @@ class Judge {
  */
 class Retry{
     boolean play = true;
+    int re;
     void retry(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("もう一度続けるには「１」を終了するには「０」を押してください");
-        int re = scanner.nextInt();
+        try {
+            re = scanner.nextInt();
+            if (re<0 || 1<re){
+                System.out.println("0か1を入力してください");
+                retry();
+            }
+        } catch (Exception e){
+            System.out.println("0か1を入力してください");
+            retry();
+        }
         switch (re){
             case 1:
                 System.out.println("もう一度勝負しましょう");
@@ -135,6 +160,8 @@ class Retry{
 public class Main{
     public static void main(String[] args){
         Janken janken = new Janken();
+        janken.startMessage();
         janken.play();
+        janken.endMessage();
     }
 }
